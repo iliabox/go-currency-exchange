@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:19-alpine
+    environment:
+      POSTGRES_USER: symfony
+      POSTGRES_PASSWORD: pswd
+      POSTGRES_DB: app
+    ports:
+      - "5433:5432"
+  api:
+    image: go-exchange-rate
+    build: .
+    depends_on: [db]
+    ports:
+      - "8080:8080"
